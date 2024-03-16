@@ -1,0 +1,7 @@
+name: eventId
+in: header
+required: true
+schema:
+  type: string
+  minLength: 1
+description: イベントID

@@ -1,0 +1,4 @@
+schema:
+  type: string
+  minLength: 1
+description: 時間帯

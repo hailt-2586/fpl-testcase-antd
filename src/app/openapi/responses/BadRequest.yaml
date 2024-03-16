@@ -1,0 +1,7 @@
+description: クライアントからのリクエストが不正です。
+content:
+  application/json:
+    schema:
+      $ref: ../components/schemas/Error.yaml
+headers:
+  $ref: ../components/headers/Headers.yaml

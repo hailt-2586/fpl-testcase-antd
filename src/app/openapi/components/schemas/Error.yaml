@@ -1,0 +1,13 @@
+type: object
+properties:
+  errorCode:
+    type: string
+    description: エラーコード。
+    minLength: 1
+  errorMessage:
+    type: string
+    description: 開発者向けエラーメッセージ。
+    minLength: 1
+required:
+  - errorCode
+  - errorMessage

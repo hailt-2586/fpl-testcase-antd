@@ -1,0 +1,45 @@
+post:
+  operationId: postInvoiceScrutiny
+  description: 請求精査API
+  tags:
+    - invoiceScrutiny
+  responses:
+    '200':
+      description: Success
+      content:
+        application/+json:
+          schema:
+            $ref: ../components/schemas/InvoiceScrutiny/InvoiceScrutinyResponse.yaml
+      headers:
+        timeZone:
+          $ref: ../components/headers/TimeZone.yaml
+        responseTime:
+          $ref: ../components/headers/ResponseTime.yaml
+        debugMode:
+          $ref: ../components/headers/DebugMode.yaml
+        eventId:
+          $ref: ../components/headers/EventId.yaml
+        aliasName:
+          $ref: ../components/headers/AliasName.yaml
+
+    '400':
+      $ref: ../responses/BadRequest.yaml
+    '500':
+      $ref: ../responses/ServerError.yaml
+  parameters:
+    - $ref: ../components/parameters/TimeZone.yaml
+    - $ref: ../components/parameters/RequestTime.yaml
+    - $ref: ../components/parameters/DebugMode.yaml
+    - $ref: ../components/parameters/EventId.yaml
+    - $ref: ../components/parameters/AliasName.yaml
+  requestBody:
+    content:
+      application/vnd.mal+json:
+        schema:
+          $ref: ../components/schemas/InvoiceScrutiny/MalInvoiceScrutinyRequest.yaml
+      application/vnd.ncs+json:
+        schema:
+          $ref: ../components/schemas/InvoiceScrutiny/NcsInvoiceScrutinyRequest.yaml
+      application/vnd.smas+json:
+        schema:
+          $ref: ../components/schemas/InvoiceScrutiny/SmasInvoiceScrutinyRequest.yaml

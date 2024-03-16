@@ -1,0 +1,8 @@
+timeZone:
+  $ref: TimeZone.yaml
+responseTime:
+  $ref: ResponseTime.yaml
+debugMode:
+  $ref: DebugMode.yaml
+eventId:
+  $ref: EventId.yaml

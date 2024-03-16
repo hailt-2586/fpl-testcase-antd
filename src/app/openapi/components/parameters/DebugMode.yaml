@@ -1,0 +1,9 @@
+name: debugMode
+in: header
+required: true
+schema:
+  type: string
+  enum:
+    - '0'
+    - '1'
+description: debugモード

@@ -1,0 +1,51 @@
+{
+  "invoiceScrutiny": {
+    "ncs": [
+      {
+        "rule": "NCS_Scrutiny_No009",
+        "path": "/invoice-scrutiny/ncs/case9/request",
+        "headers": {
+          "timeZone": "Asia/Tokyo",
+          "requestTime": "2023-09-05 14:14:32",
+          "debugMode": "1",
+          "eventId": "display",
+          "aliasName": "IR-invoiceScrutiny-leasingCo-003"
+        },
+        "requestBody": [
+          {
+            "name": "leaseorginfo16=0&dysh_kbn=null",
+            "leaseorginfo16": 0,
+            "dysh_kbn": null
+          },
+          {
+            "name": "leaseorginfo16=0&dysh_kbn=2",
+            "leaseorginfo16": 0,
+            "dysh_kbn": 2
+          },
+          {
+            "name": "leaseorginfo16=1&dysh_kbn=2",
+            "leaseorginfo16": 1,
+            "dysh_kbn": 2
+          },
+          {
+            "name": "leaseorginfo16=null&dysh_kbn=null",
+            "leaseorginfo16": null,
+            "dysh_kbn": null
+          },
+          {
+            "name": "leaseorginfo16=null&dysh_kbn=2",
+            "leaseorginfo16": null,
+            "dysh_kbn": 2
+          }
+        ],
+        "response": {
+          "detailNumber": 0,
+          "ruleId": "NCS_請求精査_009",
+          "errorClass": "エラー",
+          "errorMessage": "タイヤ季節履替は契約に含まれません。"
+        }
+      }
+    ],
+    "smas": []
+  }
+}
