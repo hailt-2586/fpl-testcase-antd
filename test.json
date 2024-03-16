@@ -1,0 +1,915 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "BRMS",
+    "description": "BRMS",
+    "contact": {
+      "email": "system@dev.fpls.jp"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8082",
+      "description": "BRMS"
+    }
+  ],
+  "tags": [
+    {
+      "name": "invoiceScrutiny"
+    }
+  ],
+  "paths": {
+    "/invoiceScrutiny": {
+      "post": {
+        "operationId": "postInvoiceScrutiny",
+        "description": "請求精査API",
+        "tags": [
+          "invoiceScrutiny"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/+json": {
+                "schema": {
+                  "type": "object",
+                  "description": "請求精査レスポンス",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "請求精査チェック結果",
+                      "items": {
+                        "type": "object",
+                        "description": "エラー内容",
+                        "required": [
+                          "detailNumber",
+                          "ruleId",
+                          "errorClass",
+                          "errorMessage"
+                        ],
+                        "properties": {
+                          "detailNumber": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 999,
+                            "description": "明細番号"
+                          },
+                          "ruleId": {
+                            "type": "string",
+                            "description": "ルールID"
+                          },
+                          "errorClass": {
+                            "type": "string",
+                            "minLength": 1,
+                            "enum": [
+                              "エラー",
+                              "ワーニング"
+                            ],
+                            "x-enum-varnames": [
+                              "error",
+                              "warning"
+                            ],
+                            "description": "エラー種別"
+                          },
+                          "errorMessage": {
+                            "type": "string",
+                            "minLength": 1,
+                            "description": "エラーメッセージ"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "timeZone": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "時間帯"
+              },
+              "responseTime": {
+                "schema": {
+                  "type": "string",
+                  "format": "date-time",
+                  "minLength": 1
+                },
+                "description": "レスポンス時刻"
+              },
+              "debugMode": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1,
+                  "enum": [
+                    "0",
+                    "1"
+                  ]
+                },
+                "description": "debugモード"
+              },
+              "eventId": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "イベントID"
+              },
+              "aliasName": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "エイリアス名"
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントからのリクエストが不正です。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errorCode": {
+                      "type": "string",
+                      "description": "エラーコード。",
+                      "minLength": 1
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "開発者向けエラーメッセージ。",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "errorCode",
+                    "errorMessage"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "timeZone": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "時間帯"
+              },
+              "responseTime": {
+                "schema": {
+                  "type": "string",
+                  "format": "date-time",
+                  "minLength": 1
+                },
+                "description": "レスポンス時 刻"
+              },
+              "debugMode": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1,
+                  "enum": [
+                    "0",
+                    "1"
+                  ]
+                },
+                "description": "debugモード"
+              },
+              "eventId": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "イベントID"
+              }
+            }
+          },
+          "500": {
+            "description": "サーバ内部で問題が発生しました。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errorCode": {
+                      "type": "string",
+                      "description": "エラーコード。",
+                      "minLength": 1
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "開発者向けエラーメッセージ。",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "errorCode",
+                    "errorMessage"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "timeZone": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "時間帯"
+              },
+              "responseTime": {
+                "schema": {
+                  "type": "string",
+                  "format": "date-time",
+                  "minLength": 1
+                },
+                "description": "レスポンス時刻"
+              },
+              "debugMode": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1,
+                  "enum": [
+                    "0",
+                    "1"
+                  ]
+                },
+                "description": "debugモード"
+              },
+              "eventId": {
+                "schema": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "イベントID"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "timeZone",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "時間帯"
+          },
+          {
+            "name": "requestTime",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "format": "date-time"
+            },
+            "description": "リクエスト時刻"
+          },
+          {
+            "name": "debugMode",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "0",
+                "1"
+              ]
+            },
+            "description": "debugモード"
+          },
+          {
+            "name": "eventId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "イベントID"
+          },
+          {
+            "name": "aliasName",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "エイリアス名"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.mal+json": {
+              "schema": {
+                "type": "object",
+                "description": "MAL-請求精査リクエスト",
+                "required": [
+                  "invoiceBasicInfo",
+                  "invoiceDetailInfo"
+                ],
+                "properties": {
+                  "invoiceBasicInfo": {
+                    "type": "object",
+                    "description": "請求基本情報",
+                    "required": [
+                      "invoiceMethod",
+                      "upsysKey",
+                      "fplsCarId",
+                      "mileage",
+                      "totalMileage",
+                      "previousTotalMileage",
+                      "mntCompDate",
+                      "total",
+                      "totalDiscount",
+                      "totalAfterDiscount",
+                      "approvalNumber",
+                      "outsourcing",
+                      "attachedMaterials"
+                    ],
+                    "properties": {
+                      "invoiceMethod": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1,
+                        "description": "請求方式"
+                      },
+                      "upsysKey": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "上流システムキー"
+                      },
+                      "fplsCarId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "/^[0-9]*$/",
+                        "description": "FPLS車両ID"
+                      },
+                      "mileage": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true,
+                        "description": "走行距離"
+                      },
+                      "totalMileage": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "総走行距離"
+                      },
+                      "previousTotalMileage": {
+                        "type": "integer",
+                        "description": "前回走行距離"
+                      },
+                      "mntCompDate": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "整備完了日"
+                      },
+                      "total": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "総計"
+                      },
+                      "totalDiscount": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "総額値引き"
+                      },
+                      "totalAfterDiscount": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "値引き後合計金額"
+                      },
+                      "approvalNumber": {
+                        "type": "array",
+                        "maxItems": 4,
+                        "description": "承認番号",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "outsourcing": {
+                        "type": "boolean",
+                        "description": "外注"
+                      },
+                      "attachedMaterials": {
+                        "type": "boolean",
+                        "description": "添付資料"
+                      }
+                    }
+                  },
+                  "invoiceDetailInfo": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "請求明細情報",
+                    "items": {
+                      "type": "object",
+                      "description": "明細内容",
+                      "required": [
+                        "detailNumber",
+                        "maintPartsKbn",
+                        "leaseMaintPartsCd",
+                        "maintPartsName",
+                        "unitCost",
+                        "workingHours",
+                        "quantity",
+                        "specialDiscount",
+                        "specialDiscountClassification",
+                        "subtotalExcludingTax",
+                        "remarks"
+                      ],
+                      "properties": {
+                        "detailNumber": {
+                          "type": "integer",
+                          "format": "int32",
+                          "minimum": 1,
+                          "maximum": 999,
+                          "description": "明細番号"
+                        },
+                        "maintPartsKbn": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "^[0-9]*$",
+                          "description": "作業部品区分"
+                        },
+                        "leaseMaintPartsCd": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "/^[0-9a-zA-Z]*$/",
+                          "description": "作業部品コード_リース"
+                        },
+                        "maintPartsName": {
+                          "type": "string",
+                          "minLength": 1,
+                          "description": "作業部品名"
+                        },
+                        "unitCost": {
+                          "type": "integer",
+                          "format": "int32",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "工賃部品単価"
+                        },
+                        "workingHours": {
+                          "type": "number",
+                          "format": "double",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "工数"
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "format": "double",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "数量"
+                        },
+                        "specialDiscount": {
+                          "type": "number",
+                          "format": "double",
+                          "minimum": 0,
+                          "description": "特別値引き"
+                        },
+                        "specialDiscountClassification": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1,
+                          "enum": [
+                            "1",
+                            "2"
+                          ],
+                          "description": "特別値引き区分"
+                        },
+                        "subtotalExcludingTax": {
+                          "type": "integer",
+                          "format": "int64",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "税抜小計"
+                        },
+                        "remarks": {
+                          "type": "string",
+                          "description": "その他"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "application/vnd.ncs+json": {
+              "schema": {
+                "type": "object",
+                "description": "NCS-請求精査リクエスト",
+                "required": [
+                  "invoiceBasicInfo",
+                  "invoiceDetailInfo"
+                ],
+                "properties": {
+                  "invoiceBasicInfo": {
+                    "type": "object",
+                    "description": "請求基本情報",
+                    "required": [
+                      "leaseCompanyId",
+                      "invoiceMethod",
+                      "upsysKey",
+                      "previousInvoiceId",
+                      "previousInvoiceSequence",
+                      "fplsCarId",
+                      "upstreamSubcontractorCompanyId",
+                      "cmFactoryId",
+                      "hjnNo",
+                      "mileage",
+                      "totalMileage",
+                      "previousTotalMileage",
+                      "latestMeterExchangeFlg",
+                      "mntCompDate",
+                      "total",
+                      "totalDiscount",
+                      "approvalNumber",
+                      "eligibleInvoiceBusinessNumber"
+                    ],
+                    "properties": {
+                      "leaseCompanyId": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 3,
+                        "pattern": "^[0-9]*$",
+                        "description": "リース会社ID"
+                      },
+                      "invoiceMethod": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1,
+                        "description": "請求方式"
+                      },
+                      "upsysKey": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "上流システムキー"
+                      },
+                      "previousInvoiceId": {
+                        "type": "string",
+                        "description": "前回請求_請求ID"
+                      },
+                      "previousInvoiceSequence": {
+                        "type": "string",
+                        "description": "前回請求_請求連番"
+                      },
+                      "fplsCarId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "/^[0-9]*$/",
+                        "description": "FPLS車両ID"
+                      },
+                      "upperCmcompanyId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "/^[0-9a-zA-Z]*$/",
+                        "description": "上流委託先会社ID"
+                      },
+                      "cmFactoryId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "/^[0-9a-zA-Z]*$/",
+                        "description": "整備工場ID"
+                      },
+                      "hjnNo": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "/^[0-9a-zA-Z]*$/",
+                        "description": "整備会社法人番号"
+                      },
+                      "mileage": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true,
+                        "description": "走行距離"
+                      },
+                      "totalMileage": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "総走行距離"
+                      },
+                      "previousTotalMileage": {
+                        "type": "integer",
+                        "description": "前回走行距離"
+                      },
+                      "latestMeterExchangeFlg": {
+                        "type": "boolean",
+                        "description": "今回メーター交換有無"
+                      },
+                      "mntCompDate": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "整備完了日"
+                      },
+                      "total": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "総計"
+                      },
+                      "totalDiscount": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "総額値引き"
+                      },
+                      "approvalNumber": {
+                        "type": "array",
+                        "maxItems": 4,
+                        "description": "承認番号",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "eligibleInvoiceBusinessNumber": {
+                        "type": "string",
+                        "description": "適格請求書事業者 番号"
+                      }
+                    }
+                  },
+                  "invoiceDetailInfo": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "請求明細情報",
+                    "items": {
+                      "type": "object",
+                      "description": "明細内容",
+                      "required": [
+                        "detailNumber",
+                        "maintPartsKbn",
+                        "leaseMaintPartsCd",
+                        "maintPartsName",
+                        "unitCost",
+                        "workingHours",
+                        "quantity",
+                        "specialDiscount",
+                        "specialDiscountClassification",
+                        "subtotalExcludingTax"
+                      ],
+                      "properties": {
+                        "detailNumber": {
+                          "type": "integer",
+                          "format": "int32",
+                          "minimum": 1,
+                          "maximum": 999,
+                          "description": "明細番号"
+                        },
+                        "maintPartsKbn": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "^[0-9]*$",
+                          "description": "作業部品区分"
+                        },
+                        "leaseMaintPartsCd": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "/^[0-9a-zA-Z]*$/",
+                          "description": "作業部品コード_リース"
+                        },
+                        "maintPartsName": {
+                          "type": "string",
+                          "description": "作業部品名"
+                        },
+                        "unitCost": {
+                          "type": "integer",
+                          "format": "int32",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "工賃部品単価"
+                        },
+                        "workingHours": {
+                          "type": "number",
+                          "format": "double",
+                          "nullable": true,
+                          "description": "工数"
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "format": "double",
+                          "nullable": true,
+                          "description": "数量"
+                        },
+                        "specialDiscount": {
+                          "type": "number",
+                          "format": "double",
+                          "description": "特別値引き"
+                        },
+                        "specialDiscountClassification": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1,
+                          "enum": [
+                            "1",
+                            "2"
+                          ],
+                          "description": "特別値引き区分"
+                        },
+                        "subtotalExcludingTax": {
+                          "type": "integer",
+                          "format": "int64",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "税抜小計"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "application/vnd.smas+json": {
+              "schema": {
+                "type": "object",
+                "description": "SMAS-請求精査リクエスト",
+                "required": [
+                  "invoiceBasicInfo",
+                  "invoiceDetailInfo"
+                ],
+                "properties": {
+                  "invoiceBasicInfo": {
+                    "type": "object",
+                    "description": "請求基本情報",
+                    "required": [
+                      "leaseCompanyId",
+                      "invoiceMethod",
+                      "upsysKey",
+                      "companyCd",
+                      "fplsCarId",
+                      "totalMileage",
+                      "receiveDate",
+                      "mntCompDate",
+                      "totalParts",
+                      "totalAfterDiscount",
+                      "specialInspectionCd"
+                    ],
+                    "properties": {
+                      "leaseCompanyId": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 3,
+                        "pattern": "^[0-9]*$",
+                        "description": "リース会社ID"
+                      },
+                      "invoiceMethod": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1,
+                        "description": "請求方式"
+                      },
+                      "upsysKey": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "上流システムキー"
+                      },
+                      "companyCd": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "/^[0-9a-zA-Z]*$/",
+                        "description": "会社コード"
+                      },
+                      "fplsCarId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "/^[0-9]*$/",
+                        "description": "FPLS車両ID"
+                      },
+                      "totalMileage": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "総走行距離"
+                      },
+                      "receiveDate": {
+                        "type": "string",
+                        "format": "date",
+                        "minLength": 1,
+                        "description": "引取日"
+                      },
+                      "mntCompDate": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "整備 完了日"
+                      },
+                      "totalParts": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "部品合計金額"
+                      },
+                      "totalAfterDiscount": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "値引き後合計金額"
+                      },
+                      "specialInspectionCd": {
+                        "type": "string",
+                        "pattern": "/^[0-9a-zA-Z]*$/",
+                        "description": "特約点検コード"
+                      }
+                    }
+                  },
+                  "invoiceDetailInfo": {
+                    "type": "array",
+                    "minItems": 1,
+                    "description": "請求明細情報",
+                    "required": [
+                      "detailNumber",
+                      "workPartClassification",
+                      "workPartCodeLease",
+                      "workPartName",
+                      "unitCost",
+                      "workingHours",
+                      "quantity",
+                      "subtotalExcludingTax"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "description": "明細内容",
+                      "required": [
+                        "detailNumber",
+                        "maintPartsKbn",
+                        "leaseMaintPartsCd",
+                        "fplMaintPartsCd",
+                        "maintPartsName",
+                        "unitCost",
+                        "workingHours",
+                        "quantity",
+                        "subtotalExcludingTax"
+                      ],
+                      "properties": {
+                        "detailNumber": {
+                          "type": "integer",
+                          "format": "int32",
+                          "minimum": 1,
+                          "maximum": 999,
+                          "description": "明細番号"
+                        },
+                        "maintPartsKbn": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "^[0-9]*$",
+                          "description": "作業部品区分"
+                        },
+                        "leaseMaintPartsCd": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "/^[0-9a-zA-Z]*$/",
+                          "description": "作業部品コード_リース"
+                        },
+                        "fplMaintPartsCd": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "/^[0-9a-zA-Z]*$/",
+                          "description": "作業部品コード_FPL"
+                        },
+                        "maintPartsName": {
+                          "type": "string",
+                          "description": "作業部品名"
+                        },
+                        "unitCost": {
+                          "type": "integer",
+                          "format": "int32",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "工賃部品単価"
+                        },
+                        "workingHours": {
+                          "type": "number",
+                          "format": "double",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "工数"
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "format": "double",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "数量"
+                        },
+                        "subtotalExcludingTax": {
+                          "type": "integer",
+                          "format": "int64",
+                          "minimum": 0,
+                          "nullable": true,
+                          "description": "税抜小計"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+name: requestTime
+in: header
+required: true
+schema:
+  type: string
+  minLength: 1
+  format: date-time
+description: リクエスト時刻

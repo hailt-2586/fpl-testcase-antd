@@ -1,0 +1,38 @@
+type: object
+description: 請求精査レスポンス
+properties:
+  result:
+    type: array
+    description: 請求精査チェック結果
+    items:
+      type: object
+      description: エラー内容
+      required:
+        - detailNumber
+        - ruleId
+        - errorClass
+        - errorMessage
+      properties:
+          detailNumber:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 999
+            description: 明細番号
+          ruleId:
+            type: string
+            description: ルールID
+          errorClass:
+            type: string
+            minLength: 1
+            enum:
+              - 'エラー'
+              - 'ワーニング'
+            x-enum-varnames:
+              - error
+              - warning
+            description: エラー種別
+          errorMessage:
+            type: string
+            minLength: 1
+            description: エラーメッセージ

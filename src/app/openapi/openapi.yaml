@@ -1,0 +1,17 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: BRMS
+  description: BRMS
+  contact:
+    email: system@dev.fpls.jp
+servers:
+  - url: http://localhost:8082
+    description: BRMS
+  - url: http://localhost:8080
+    description: TEST
+tags:
+  - name: invoiceScrutiny
+paths:
+  /invoiceScrutiny:
+    $ref: paths/invoiceScrutiny.yaml

@@ -1,0 +1,159 @@
+type: object
+description: MAL-請求精査リクエスト
+required:
+  - invoiceBasicInfo
+  - invoiceDetailInfo
+properties:
+  invoiceBasicInfo:
+    type: object
+    description: 請求基本情報
+    required:
+      - invoiceMethod
+      - upsysKey
+      - fplsCarId
+      - mileage
+      - totalMileage
+      - previousTotalMileage
+      - mntCompDate
+      - total
+      - totalDiscount
+      - totalAfterDiscount
+      - approvalNumber
+      - outsourcing
+      - attachedMaterials
+    properties:
+      invoiceMethod:
+        type: string
+        minLength: 1
+        maxLength: 1
+        description: 請求方式
+      upsysKey:
+        type: string
+        minLength: 1
+        description: 上流システムキー
+      fplsCarId:
+        type: string
+        minLength: 1
+        pattern: '/^[0-9]*$/'
+        description: FPLS車両ID
+      mileage:
+        type: integer
+        format: int32
+        nullable: true
+        description: 走行距離
+      totalMileage:
+        type: integer
+        format: int32
+        description: 総走行距離
+      previousTotalMileage:
+        type: integer
+        description: 前回走行距離
+      mntCompDate:
+        type: string
+        format: date
+        description: 整備完了日
+      total:
+        type: integer
+        format: int64
+        description: 総計
+      totalDiscount:
+        type: integer
+        format: int64
+        description: 総額値引き
+      totalAfterDiscount:
+        type: integer
+        format: int64
+        description: 値引き後合計金額
+      approvalNumber:
+        type: array
+        maxItems: 4
+        description: 承認番号
+        items:
+          type: string
+      outsourcing:
+        type: boolean
+        description: 外注
+      attachedMaterials:
+        type: boolean
+        description: 添付資料
+  invoiceDetailInfo:
+    type: array
+    minItems: 1
+    description: 請求明細情報
+    items:
+      type: object
+      description: 明細内容
+      required:
+        - detailNumber
+        - maintPartsKbn
+        - leaseMaintPartsCd
+        - maintPartsName
+        - unitCost
+        - workingHours
+        - quantity
+        - specialDiscount
+        - specialDiscountClassification
+        - subtotalExcludingTax
+        - remarks
+      properties:
+        detailNumber:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 999
+          description: 明細番号
+        maintPartsKbn:
+          type: string
+          minLength: 1
+          pattern: '^[0-9]*$'
+          description: 作業部品区分
+        leaseMaintPartsCd:
+          type: string
+          minLength: 1
+          pattern: '/^[0-9a-zA-Z]*$/'
+          description: 作業部品コード_リース
+        maintPartsName:
+          type: string
+          minLength: 1
+          description: 作業部品名
+        unitCost:
+          type: integer
+          format: int32
+          minimum: 0
+          nullable: true
+          description: 工賃部品単価
+        workingHours:
+          type: number
+          format: double
+          minimum: 0
+          nullable: true
+          description: 工数
+        quantity:
+          type: number
+          format: double
+          minimum: 0
+          nullable: true
+          description: 数量
+        specialDiscount:
+          type: number
+          format: double
+          minimum: 0
+          description: 特別値引き
+        specialDiscountClassification:
+          type: string
+          minLength: 1
+          maxLength: 1
+          enum:
+            - '1'
+            - '2'
+          description: 特別値引き区分
+        subtotalExcludingTax:
+          type: integer
+          format: int64
+          minimum: 0
+          nullable: true
+          description: 税抜小計
+        remarks:
+          type: string
+          description: その他
+

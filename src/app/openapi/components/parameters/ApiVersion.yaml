@@ -1,0 +1,7 @@
+name: apiVersion
+in: header
+required: true
+schema:
+  type: string
+  minLength: 1
+description: APIバージョン
